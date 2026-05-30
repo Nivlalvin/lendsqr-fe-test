@@ -1,0 +1,369 @@
+@use '../../styles/variables' as *;
+
+.userDetailsPage {
+  max-width: 100%;
+}
+
+// ─── Back Button ──────────────────────────────────────
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: $font-size-sm;
+  color: $text-body;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 32px;
+  padding: 0;
+
+  &:hover {
+    color: $primary-dark;
+  }
+}
+
+// ─── Page Header ──────────────────────────────────────
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.pageTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: $primary-dark;
+}
+
+.headerActions {
+  display: flex;
+  gap: 16px;
+}
+
+.blacklistBtn {
+  height: 40px;
+  padding: 0 20px;
+  border: 1px solid $status-blacklisted;
+  border-radius: $radius-sm;
+  color: $status-blacklisted;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: $status-blacklisted;
+    color: $white;
+  }
+}
+
+.activateBtn {
+  height: 40px;
+  padding: 0 20px;
+  border: 1px solid $primary;
+  border-radius: $radius-sm;
+  color: $primary;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: $primary;
+    color: $white;
+  }
+}
+
+// ─── User Card ────────────────────────────────────────
+.userCard {
+  background: $white;
+  border-radius: $radius-md;
+  box-shadow: $shadow-card;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.userCardTop {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 40px 40px 0;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: 24px;
+    padding: 24px 24px 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+// ─── User Identity ────────────────────────────────────
+.userIdentity {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.avatarWrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e0e0e0;
+}
+
+.userNameWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.userName {
+  font-size: 22px;
+  font-weight: 700;
+  color: $primary-dark;
+}
+
+.userId {
+  font-size: $font-size-sm;
+  color: $text-body;
+}
+
+// ─── Divider ──────────────────────────────────────────
+.divider {
+  width: 1px;
+  height: 80px;
+  background: $border;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+// ─── Tier ─────────────────────────────────────────────
+.tierWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.tierLabel {
+  font-size: $font-size-sm;
+  color: $text-body;
+}
+
+.starRating {
+  display: flex;
+  gap: 4px;
+}
+
+// ─── Balance ──────────────────────────────────────────
+.balanceWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.balance {
+  font-size: 22px;
+  font-weight: 700;
+  color: $primary-dark;
+}
+
+.accountInfo {
+  font-size: $font-size-sm;
+  color: $text-body;
+}
+
+// ─── Tabs ─────────────────────────────────────────────
+.tabs {
+  display: flex;
+  margin-top: 40px;
+  border-top: 1px solid $border;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    height: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $border;
+  }
+}
+
+.tab {
+  padding: 16px 24px;
+  font-size: $font-size-base;
+  font-weight: 500;
+  color: $text-body;
+  background: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+
+  &:hover {
+    color: $primary;
+  }
+
+  &.activeTab {
+    color: $primary;
+    border-bottom-color: $primary;
+    font-weight: 600;
+  }
+}
+
+// ─── Tab Content ──────────────────────────────────────
+.tabContent {
+  background: $white;
+  border-radius: $radius-md;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+}
+
+// ─── Section ──────────────────────────────────────────
+.section {
+  padding: 32px 40px;
+  border-bottom: 1px solid $border;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: 24px 20px;
+  }
+}
+
+.sectionTitle {
+  font-size: $font-size-base;
+  font-weight: 600;
+  color: $primary-dark;
+  margin-bottom: 24px;
+}
+
+.sectionContent {
+  width: 100%;
+}
+
+// ─── Info Grid ────────────────────────────────────────
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 32px 16px;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 16px;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infoLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: $text-muted;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.infoValue {
+  font-size: $font-size-base;
+  font-weight: 500;
+  color: $text-body;
+  word-break: break-word;
+}
+
+// ─── Guarantor Block ──────────────────────────────────
+.guarantorBlock {
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid $border;
+
+  &.lastGuarantor {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+// ─── Empty Tab ────────────────────────────────────────
+.emptyTab {
+  padding: 60px 40px;
+  text-align: center;
+  color: $text-muted;
+  font-size: $font-size-base;
+}
+
+// ─── Loading / Not Found ──────────────────────────────
+.loading {
+  padding: 60px;
+  text-align: center;
+  color: $text-muted;
+}
+
+.notFound {
+  padding: 60px;
+  text-align: center;
+  color: $text-muted;
+
+  button {
+    margin-top: 16px;
+    padding: 10px 24px;
+    background: $primary;
+    color: $white;
+    border: none;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    font-size: $font-size-base;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+}
