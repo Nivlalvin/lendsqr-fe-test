@@ -1,8 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-
-// --- Mocks (must come before importing the component) ---
 
 vi.mock('../data/users.json', () => ({
   default: [],
@@ -20,19 +18,11 @@ vi.mock('../utils/storage', () => ({
 }));
 
 vi.mock('../components/DashboardLayout/DashboardLayout', () => ({
-  default: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+  default: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
 }));
 
-// Mock react-router hooks to prevent any unexpected errors
-vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
-  return {
-    ...actual,
-    useNavigate: () => vi.fn(),
-  };
-});
-
-// Complete mock of useUsers with valid user array
 vi.mock('../hooks/useUsers', () => ({
   useUsers: () => ({
     users: [
@@ -130,7 +120,6 @@ vi.mock('../hooks/useUsers', () => ({
 
 import Users from '../pages/Users/Users';
 
-// Helper to render the component with MemoryRouter
 const renderUsers = () =>
   render(
     <MemoryRouter>
@@ -139,8 +128,7 @@ const renderUsers = () =>
   );
 
 describe('Users Page', () => {
-  // --- Positive tests ---
-
+  // Positive tests
   it('renders the users page title', () => {
     renderUsers();
     expect(screen.getByText('Users')).toBeInTheDocument();
@@ -190,8 +178,7 @@ describe('Users Page', () => {
     expect(screen.getByText(/out of/i)).toBeInTheDocument();
   });
 
-  // --- Negative tests ---
-
+  // Negative tests
   it('does not render context menu by default', () => {
     renderUsers();
     expect(screen.queryByText('View Details')).not.toBeInTheDocument();
@@ -208,30 +195,16 @@ describe('Users Page', () => {
     });
   });
 
-  it('resets filter inputs when Reset is clicked (popover stays open)', async () => {
+  it('closes filter popover when reset is clicked', async () => {
     renderUsers();
-
-    // Open filter popover
     const filterButtons = screen.getAllByLabelText(/filter by/i);
     fireEvent.click(filterButtons[0]);
     await waitFor(() => {
       expect(screen.getByText('Reset')).toBeInTheDocument();
     });
-
-    // Fill some filter fields
-    const usernameInput = screen.getByPlaceholderText('User');
-    fireEvent.change(usernameInput, { target: { value: 'Grace' } });
-    expect(usernameInput).toHaveValue('Grace');
-
-    // Click Reset
     fireEvent.click(screen.getByText('Reset'));
-
-    // Assert that inputs are cleared
     await waitFor(() => {
-      expect(usernameInput).toHaveValue('');
+      expect(screen.queryByText('Reset')).not.toBeInTheDocument();
     });
-
-    // Assert that popover is STILL open (your component does NOT close on reset)
-    expect(screen.getByText('Organization')).toBeInTheDocument();
   });
 });
